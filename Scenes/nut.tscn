@@ -48,13 +48,15 @@ animations = [{
 radius = 8.0
 
 [node name="Nut" type="AnimatedSprite2D"]
+z_index = -1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_rlxw4")
 animation = &"Health3"
 script = ExtResource("3_wgaab")
-outer_saturation = 0
-middle_saturation = 0
-inner_saturation = 4
+inner_saturation = 8
+outer_speed_multiplier = 0.6
+middle_speed_multiplier = 0.7
+inner_speed_multiplier = 0.8
 
 [node name="Area" type="Area2D" parent="."]
 

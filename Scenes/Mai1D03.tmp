@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4cyx0j7p2qmf"]
+
+[ext_resource type="Script" path="res://FoodSpawner.gd" id="1_6pttn"]
+[ext_resource type="Script" path="res://Scenes/SmartCanvasLayer.gd" id="1_ka6oy"]
+[ext_resource type="PackedScene" uid="uid://dkvvqjtcqy0x3" path="res://Scenes/rat.tscn" id="2_62lne"]
+[ext_resource type="Script" path="res://EnemyRat.gd" id="3_1xhi1"]
+[ext_resource type="Texture2D" uid="uid://18c0wgn7m4cu" path="res://BeddingSawdustPixelIndiSeamlessDouble.png" id="5_dysr3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3b5xj"]
+bg_color = Color(0.278431, 0.694118, 0.466667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tclm8"]
+bg_color = Color(0.2, 0.443137, 0.513726, 1)
+
+[node name="Root" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Canvas" type="CanvasLayer" parent="Camera" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_ka6oy")
+camera = NodePath("..")
+
+[node name="ProgressPlayer" type="ProgressBar" parent="Camera/Canvas"]
+offset_left = -273.425
+offset_top = -155.0
+offset_right = -18.425
+offset_bottom = -132.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3b5xj")
+
+[node name="ProgressEnemy" type="ProgressBar" parent="Camera/Canvas"]
+anchors_preset = -1
+anchor_left = -0.00694444
+anchor_top = 0.0169753
+anchor_right = -0.00694444
+anchor_bottom = 0.0385802
+offset_left = 3.42
+offset_top = -166.0
+offset_right = 278.42
+offset_bottom = -157.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tclm8")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Camera/Canvas"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "TEEEXT"
+metadata/_edit_use_anchors_ = true
+
+[node name="FoodSpawner" type="Node2D" parent="."]
+script = ExtResource("1_6pttn")
+spawn_time_delta_multiplier = 0.95
+
+[node name="Player" parent="." node_paths=PackedStringArray("progress_bar") instance=ExtResource("2_62lne")]
+progress_bar = NodePath("../Camera/Canvas/ProgressPlayer")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("progress_bar") instance=ExtResource("2_62lne")]
+position = Vector2(110, -3)
+script = ExtResource("3_1xhi1")
+progress_bar = NodePath("../Camera/Canvas/ProgressEnemy")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -2
+texture_filter = 1
+texture_repeat = 2
+offset_left = -306.0
+offset_top = -173.0
+offset_right = 302.0
+offset_bottom = 174.0
+texture = ExtResource("5_dysr3")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true

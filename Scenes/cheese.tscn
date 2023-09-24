@@ -48,13 +48,17 @@ animations = [{
 size = Vector2(14, 12)
 
 [node name="Cheese" type="AnimatedSprite2D"]
+z_index = -1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_s1mdr")
 animation = &"Health1"
 script = ExtResource("3_t2xim")
-outer_saturation = 2
-middle_saturation = 2
-inner_saturation = 2
+outer_saturation = 3
+middle_saturation = 3
+inner_saturation = 3
+outer_speed_multiplier = 1.1
+middle_speed_multiplier = 1.1
+inner_speed_multiplier = 1.1
 
 [node name="Area" type="Area2D" parent="."]
 

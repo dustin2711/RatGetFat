@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dkvvqjtcqy0x3"]
+[gd_scene load_steps=29 format=3 uid="uid://dkvvqjtcqy0x3"]
 
 [ext_resource type="Texture2D" uid="uid://b2uxy4e3o44ea" path="res://GrayRat.png" id="1_3yo1i"]
 [ext_resource type="Script" path="res://PlayerRat.gd" id="2_8e0rc"]
@@ -161,32 +161,6 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="FontFile" id="FontFile_tl3te"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/2/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/22/0 = Vector2(0, 0)
-cache/0/2/0/ascent = 0.0
-cache/0/2/0/descent = 0.0
-cache/0/2/0/underline_position = 0.0
-cache/0/2/0/underline_thickness = 0.0
-cache/0/2/0/scale = 1.0
-cache/0/2/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/2/0/kerning_overrides/2/0 = Vector2(0, 0)
-cache/0/2/0/kerning_overrides/22/0 = Vector2(0, 0)
-cache/0/22/0/ascent = 0.0
-cache/0/22/0/descent = 0.0
-cache/0/22/0/underline_position = 0.0
-cache/0/22/0/underline_thickness = 0.0
-cache/0/22/0/scale = 1.0
-cache/0/22/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/22/0/kerning_overrides/2/0 = Vector2(0, 0)
-cache/0/22/0/kerning_overrides/22/0 = Vector2(0, 0)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_qtkmu"]
 radius = 11.0
 
@@ -231,17 +205,15 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_g57gc")
 animation = &"walking_down"
 script = ExtResource("2_8e0rc")
-speed = 400
-stunned_ms = 900
+key_up = null
+key_down = null
+key_right = null
+key_left = null
+key_eat = null
+key_drop = null
+speed = null
+stunned_ms = null
 eating_ms = 1200
-
-[node name="Name" type="Label" parent="."]
-offset_left = 1.0
-offset_top = -26.0
-offset_right = 41.0
-theme_override_fonts/font = SubResource("FontFile_tl3te")
-theme_override_font_sizes/font_size = 16
-text = "SP1"
 
 [node name="Area" type="Area2D" parent="."]
 

@@ -5,6 +5,7 @@ class_name Food
 var health = 3
 var max_health = 3
 
+var rat: Rat = null
 var time_of_drop_by_rat = {}
 
 @export var outer_saturation: int = 1
@@ -21,10 +22,6 @@ var time_of_drop_by_rat = {}
 func _ready():
 	animation = "Health3"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
 func get_speed_multiplier():
 	if health == 3:
 		return outer_speed_multiplier
@@ -36,15 +33,25 @@ func get_speed_multiplier():
 		return 1
 
 func get_ms_since_drop(rat: Rat):
+	""" Gets the time since food was dropped by rat. """
 	var time_of_drop = time_of_drop_by_rat.get(rat)
 	if time_of_drop == null:
 		return 9999
 	return Time.get_ticks_msec() - time_of_drop
 	
-func reduce():
-	""" Reduces the amount of this food by eating it. 
+func bite_off():
+	""" Reduces the amount of this food by eating a bit. 
 	Returns true when eaten. """
 	
+	assert(rat != null)
+	
+	if health == 3:
+		rat.increase_saturation(outer_saturation)
+	elif health == 2:
+		rat.increase_saturation(middle_saturation)
+	elif health == 1:
+		rat.increase_saturation(inner_saturation)
+		
 	health -= 1
 	
 	if health == 2:
@@ -53,18 +60,26 @@ func reduce():
 		animation = "Health1"
 	elif health <= 0:
 		queue_free()
+		spawner.foods.erase(self)
 	else:
 		push_error()
 
 func drop(rat: Rat):
+	""" Food is dropped and be parented to FoodSpawner. """
 	time_of_drop_by_rat[rat] = Time.get_ticks_msec()
-	reparent(spawner)
+	self.rat = null
+	call_deferred("reparent_to_spawner")
 	
-func _on_food_eaten(food):
-	print("Food eaten")
+func attach(rat: Rat):
+	""" Food is collected by rat. """
+	self.rat = rat
+	call_deferred("reparent_to_rat")
 
-func _exit_tree():
-	self.spawner.foods.erase(self)
-
+func reparent_to_spawner():
+	reparent(self.spawner)
+	
+func reparent_to_rat():
+	reparent(self.rat)
+		
 # Nice to know
 #	material.set_shader_parameter("fillPortion", 1.0 * health / max_health)

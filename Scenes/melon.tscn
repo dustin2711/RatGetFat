@@ -52,10 +52,14 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_fnd83")
 animation = &"Health1"
 script = ExtResource("3_bhd8s")
-outer_saturation = 3
-middle_saturation = 2
+outer_saturation = 5
+middle_saturation = 3
+outer_speed_multiplier = 1.0
+middle_speed_multiplier = 1.0
+inner_speed_multiplier = 1.0
 
 [node name="Area" type="Area2D" parent="."]
 
 [node name="Shape" type="CollisionShape2D" parent="Area"]
+z_index = -1
 shape = SubResource("CircleShape2D_e3v32")

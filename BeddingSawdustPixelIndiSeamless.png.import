@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxeomowebo22f"
-path="res://.godot/imported/GrayRat4_x2.png-c9ca853cada208cb47f2b3864a921613.ctex"
+uid="uid://bl47f2nuldyo7"
+path="res://.godot/imported/BeddingSawdustPixelIndiSeamless.png-b778cb68c1734b4aa4f83f5d0a518212.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GrayRat4_x2.png"
-dest_files=["res://.godot/imported/GrayRat4_x2.png-c9ca853cada208cb47f2b3864a921613.ctex"]
+source_file="res://BeddingSawdustPixelIndiSeamless.png"
+dest_files=["res://.godot/imported/BeddingSawdustPixelIndiSeamless.png-b778cb68c1734b4aa4f83f5d0a518212.ctex"]
 
 [params]
 

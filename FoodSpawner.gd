@@ -2,14 +2,17 @@ extends Node2D
 
 class_name FoodSpawner
 
+# Is automatic spawning enabled?
 @export var is_active = true
-@export var spawn_time_delta = 500 # ms
-@export var spawn_time_delta_multiplier = 0.9
-@export var min_spawn_time_delta = 200
+# Time between two spawn in milliseconds
+@export var spawn_time_delta_at_no_food: int = 1000
+@export var spawn_time_delta_at_max_food_count: int = 10000
+@export var max_food_count: int = 20
 
+# Distance in pixels
 @export var min_spawn_distance = 40
 
-var frame = 0
+var time_of_last_spawn: int = 0
 
 var quarter_camera_size = Vector2(0, 0)
 var camera_position = Vector2(0, 0)
@@ -29,15 +32,32 @@ func _ready():
 	pass
 	
 func _process(delta):
-	if is_active && frame % spawn_time_delta == 0:
-		frame = 0
-		# Shrink spawn_time_delta
-		spawn_time_delta = int(clamp(spawn_time_delta_multiplier * spawn_time_delta, min_spawn_time_delta, 99999))
+	if len(foods) > max_food_count:
+		return
+		
+	var ms_since_spawn = Time.get_ticks_msec() - time_of_last_spawn
+	var current_time_delta = spawn_time_delta_at_no_food + spawn_time_delta_at_max_food_count / max_food_count * len(foods)
+	if ms_since_spawn > current_time_delta / Engine.time_scale:
 		spawn()
-	frame += 1
-#
+		
+func spawn():
+	""" Spawns a food randomly in the camera area. """
+	# Update current camera parameters
+	quarter_camera_size = 0.40 * camera.get_viewport_rect().size / 2
+	camera_position = camera.get_screen_center_position()
+	camera_zoom = camera.zoom.x
+	
+	var food = load_food().instantiate()
+	var position = get_start_position(0)
+	food.global_position = position
+	foods.append(food)
+	print("Spawned food at " + str(position))
+	add_child(food)
+	
+	time_of_last_spawn = Time.get_ticks_msec()
+	
 func get_start_position(loop):
-
+	""" Returns a position inside the camera area. """
 	var position = self.camera_position
 	# Because zoom level is 2, we need to half the values again
 	position.x += randf_range(-quarter_camera_size.x, quarter_camera_size.x)
@@ -57,26 +77,15 @@ func load_food():
 #	return load("res://Scenes/melon.tscn")
 #	return load("res://Scenes/nut.tscn")
 #	return load("res://Scenes/cheese.tscn")
-	var random = randi_range(0, 2)
-	if random == 0:
+	var random = randi_range(0, 4)
+	if random <= 1:
 		return load("res://Scenes/nut.tscn")
-	elif random == 1:
-		return load("res://Scenes/cheese.tscn")
-	elif random == 2:
+	elif random <= 3:
 		return load("res://Scenes/melon.tscn")
-		
-# is overridden in child classes
-func spawn():
-	# Update current camera parameters
-	quarter_camera_size = 0.47 * camera.get_viewport_rect().size / camera_zoom
-	camera_position = camera.get_screen_center_position()
-	camera_zoom = camera.zoom.x
-	
-	var food = load_food().instantiate()
-	food.global_position = get_start_position(0)
-	foods.append(food)
-	add_child(food)
-	print("Spawned food at " + str(food.global_position))
+	elif random == 4:
+		return load("res://Scenes/cheese.tscn")
+	else:
+		assert(false)
 
 # K Key spawns food
 func _input(event):
