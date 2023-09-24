@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnlomdl6u1gby"]
+
+[ext_resource type="Texture2D" uid="uid://c61byabjpkf30" path="res://Cheese1.png" id="1_oei15"]
+[ext_resource type="Texture2D" uid="uid://6vnjb6xvoa0h" path="res://Cheese2.png" id="2_6a4qj"]
+[ext_resource type="Texture2D" uid="uid://b1l43u8qinyhj" path="res://Cheese3.png" id="3_bu1ub"]
+[ext_resource type="Script" path="res://Food.gd" id="3_t2xim"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdu3m"]
+atlas = ExtResource("1_oei15")
+region = Rect2(0, 0, 24, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xol3g"]
+atlas = ExtResource("2_6a4qj")
+region = Rect2(0, 0, 24, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecitd"]
+atlas = ExtResource("3_bu1ub")
+region = Rect2(0, 0, 24, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1mdr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdu3m")
+}],
+"loop": true,
+"name": &"Health1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xol3g")
+}],
+"loop": true,
+"name": &"Health2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecitd")
+}],
+"loop": true,
+"name": &"Health3",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epyed"]
+size = Vector2(22, 15)
+
+[node name="Cheese" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_s1mdr")
+animation = &"Health3"
+script = ExtResource("3_t2xim")
+outer_saturation = 2
+middle_saturation = 2
+inner_saturation = 2
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_epyed")

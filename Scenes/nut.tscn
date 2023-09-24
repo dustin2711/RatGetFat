@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjyifxbqntqu0"]
+
+[ext_resource type="Texture2D" uid="uid://bo4gvwdskex5r" path="res://Nut1.png" id="1_mp3vh"]
+[ext_resource type="Texture2D" uid="uid://decj7weptpold" path="res://Nut2.png" id="2_3y0or"]
+[ext_resource type="Texture2D" uid="uid://b1risno8kojah" path="res://Nut3.png" id="3_kbhuf"]
+[ext_resource type="Script" path="res://Food.gd" id="3_wgaab"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3lw3"]
+atlas = ExtResource("1_mp3vh")
+region = Rect2(0, 0, 17, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ef03g"]
+atlas = ExtResource("2_3y0or")
+region = Rect2(0, 0, 17, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ov1qf"]
+atlas = ExtResource("3_kbhuf")
+region = Rect2(0, 0, 17, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rlxw4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3lw3")
+}],
+"loop": true,
+"name": &"Health1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ef03g")
+}],
+"loop": true,
+"name": &"Health2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ov1qf")
+}],
+"loop": true,
+"name": &"Health3",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao4kw"]
+radius = 8.0
+
+[node name="Nut" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_rlxw4")
+animation = &"Health3"
+script = ExtResource("3_wgaab")
+outer_saturation = 0
+middle_saturation = 0
+inner_saturation = 4
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_ao4kw")

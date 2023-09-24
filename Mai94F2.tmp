@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4cyx0j7p2qmf"]
+
+[ext_resource type="Script" path="res://FoodSpawner.gd" id="1_08pev"]
+[ext_resource type="PackedScene" uid="uid://dkvvqjtcqy0x3" path="res://rat.tscn" id="2_adj5r"]
+[ext_resource type="Script" path="res://EnemyRat.gd" id="3_3pyui"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="FoodSpawner" type="Node2D" parent="."]
+script = ExtResource("1_08pev")
+
+[node name="Player" parent="." instance=ExtResource("2_adj5r")]
+visible = false
+
+[node name="Enemy" parent="." instance=ExtResource("2_adj5r")]
+position = Vector2(110, -3)
+script = ExtResource("3_3pyui")

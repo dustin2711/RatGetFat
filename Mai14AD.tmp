@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4cyx0j7p2qmf"]
+
+[ext_resource type="Texture2D" uid="uid://eni6km2njf2q" path="res://RatTest.png" id="1_8oc3k"]
+[ext_resource type="Script" path="res://Player.gd" id="2_1c7te"]
+[ext_resource type="Texture2D" uid="uid://rx4fkwvqwd03" path="res://Nut.png" id="3_xatey"]
+[ext_resource type="Material" uid="uid://dpvthmmpp0w4y" path="res://CooldownShader.tres" id="3_xiyhx"]
+[ext_resource type="Script" path="res://Nut.gd" id="4_uj5dr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nhdv2"]
+radius = 7.0
+height = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_amw5g"]
+radius = 6.0
+
+[node name="Root" type="Node2D"]
+
+[node name="Player" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_8oc3k")
+script = ExtResource("2_1c7te")
+speed = null
+
+[node name="Area" type="Area2D" parent="Player"]
+
+[node name="Shape" type="CollisionShape2D" parent="Player/Area"]
+shape = SubResource("CapsuleShape2D_nhdv2")
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Nuts" type="Node2D" parent="."]
+
+[node name="Nut" type="Sprite2D" parent="Nuts" groups=["Food"]]
+texture_filter = 1
+material = ExtResource("3_xiyhx")
+position = Vector2(28, -31)
+texture = ExtResource("3_xatey")
+script = ExtResource("4_uj5dr")
+
+[node name="Area" type="Area2D" parent="Nuts/Nut"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nuts/Nut/Area"]
+visible = false
+shape = SubResource("CircleShape2D_amw5g")
+
+[connection signal="area_entered" from="Player/Area" to="Player" method="_on_area_area_entered"]
+[connection signal="area_entered" from="Nuts/Nut/Area" to="Nuts/Nut" method="_on_area_area_entered"]

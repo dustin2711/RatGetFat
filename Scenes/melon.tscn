@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://4uiq8q8gfufu"]
+
+[ext_resource type="Texture2D" uid="uid://b5fwpvbmy1sjn" path="res://Melon1.png" id="1_m84tj"]
+[ext_resource type="Texture2D" uid="uid://c353d16lw8bvc" path="res://Melon2.png" id="2_i24q6"]
+[ext_resource type="Texture2D" uid="uid://eapo7kjxlrjq" path="res://Melon3.png" id="3_4ktki"]
+[ext_resource type="Script" path="res://Food.gd" id="3_bhd8s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6j3t"]
+atlas = ExtResource("1_m84tj")
+region = Rect2(0, 0, 18, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2qa0"]
+atlas = ExtResource("2_i24q6")
+region = Rect2(0, 0, 18, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlfi5"]
+atlas = ExtResource("3_4ktki")
+region = Rect2(0, 0, 18, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fnd83"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6j3t")
+}],
+"loop": true,
+"name": &"Health1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2qa0")
+}],
+"loop": true,
+"name": &"Health2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlfi5")
+}],
+"loop": true,
+"name": &"Health3",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e3v32"]
+
+[node name="Melon" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_fnd83")
+animation = &"Health1"
+script = ExtResource("3_bhd8s")
+outer_saturation = 3
+middle_saturation = 2
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_e3v32")

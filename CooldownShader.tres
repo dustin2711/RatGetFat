@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dpvthmmpp0w4y"]
+
+[sub_resource type="Shader" id="3"]
+code = "shader_type canvas_item;
+
+uniform float fillPortion = 1.0;
+	
+void fragment()
+{	
+  COLOR = texture(TEXTURE, UV);
+  if (UV.y < 1.0 - fillPortion)
+  {
+    COLOR.a = 0.0;
+  }
+}"
+
+[resource]
+shader = SubResource("3")
+shader_parameter/fillPortion = 1.0
