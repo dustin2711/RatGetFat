@@ -20,6 +20,17 @@ func take_food(food):
 	super.take_food(food)
 	start_eating()
 
+func _input(event):
+	super._input(event)
+	
+	if event is InputEventKey:
+		if event.keycode == KEY_O and event.is_pressed():
+			drop_food()
+			
+		if event.keycode == KEY_P and event.is_pressed():
+			print("time_started_eating = " + str(self.time_started_eating))
+			print("get_ms_since_started_eating() = " + str(self.get_ms_since_started_eating()))
+				
 func consume_food():
 	""" Immediatly continue eating if food is not empty. """
 	super.consume_food()

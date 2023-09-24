@@ -9,7 +9,7 @@ var food: Food = null
 @onready var food_spawner = root.find_child("FoodSpawner")
 @onready var audio_eating = $AudioEating
 
-# Is null when no space is pressed currently
+# When this is != null, then currently food is eaten
 var time_started_eating = null
 
 var last_velocity = Vector2(0, 0)
@@ -23,12 +23,12 @@ func _process(delta):
 		return
 
 	if time_started_eating != null and self.food != null:
-		if get_ms_since_started_eating() > 800:
+		if get_ms_since_started_eating() > 800 / Engine.time_scale:
 			consume_food()
 	else:
 		move(delta)
 	
-	# Set the nut's position relative to the player.
+	# Set the food's position relative to the player.
 	if self.food != null:
 		if animation == "walking_down":
 			self.food.position = Vector2(-1, 14)
@@ -46,9 +46,19 @@ func _input(event):
 		
 	if event is InputEventKey:
 				
-		if event.keycode == KEY_Q and event.is_pressed() and self.food != null:
+		if event.keycode == KEY_SHIFT and event.is_pressed() and self.food != null:
 			drop_food()
 		
+		# Speed up
+		if event.keycode == KEY_2 and event.is_pressed():
+			Engine.time_scale = 2
+		if event.keycode == KEY_4 and event.is_pressed():
+			Engine.time_scale = 4
+		if event.keycode == KEY_8 and event.is_pressed():
+			Engine.time_scale = 8
+		if event.keycode == KEY_0 and event.is_pressed():
+			Engine.time_scale = 1
+								
 		if event.keycode == KEY_SPACE:
 			# When space is just pressed, set the time for that
 			var just_pressed = event.is_pressed() and not event.is_echo()
@@ -76,23 +86,28 @@ func _on_area_area_entered(area):
 			
 	
 func take_food(food):
-	print("Taking food.")
+	""" Takes the given food to carry it. """
+	report("Taking food.")
 	self.food = food
 	food.reparent(self)
 		
 func drop_food():
-	print("Dropping food.")
+	""" Drops the current food. """
+	report("Dropping food.")
 	self.food.drop(self)
 	self.food = null
+	time_started_eating = null
 	
 func start_eating():
-	print("Starting eating")
+	""" Starts eating food (needs some time)."""
+	report("Starting eating")
 	time_started_eating = Time.get_ticks_msec()
 	stop_walk_animation()
 	audio_eating.play()
 		
 func stop_eating():
-	print("Stopping eating")
+	""" Stops eating food (needs some time)."""
+#	report("Stopping eating")
 	audio_eating.stop()
 	time_started_eating = null
 		
@@ -100,10 +115,11 @@ func consume_food():
 	""" Consumes one food stack. Returns true when eaten. """
 	if self.food == null:
 		push_error("Food must be not null.")
-		
+	report("Consuming food")
 	stop_eating()
 	if self.food.reduce():
 		self.food = null
+		time_started_eating = null
 			
 func get_velocity():
 	""" Overriden in child class. """
@@ -127,7 +143,13 @@ func move(delta):
 		animation = "walking_right"
 	if velocity.x < 0:
 		animation = "walking_left"
-		
+	
+	if self.food != null:
+		# Bring food only to front if walking down
+		self.food.z_as_relative = true
+		self.food.z_index = -1
+#		1 if animation == "walking_down" else -1
+	
 	if velocity != last_velocity:
 		play(animation)
 		
@@ -146,7 +168,8 @@ func stop_walk_animation():
 	pause()
 	set_frame_and_progress(1, 0)
 	
-
+func report(text: String):
+	print(name + ": " + text)
 
 
 # Nice to know

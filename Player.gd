@@ -60,10 +60,6 @@ func _input(event):
 			var just_released = !event.is_pressed() and not event.is_echo()
 			if just_released:
 				audio_eating.stop()
-#				# Release food when released immediatly
-#				if get_ms_since_space_down() < 200:
-#					self.food.drop(self)
-#					self.food = null
 				time_space_pressed = null
 
 func drop_food():

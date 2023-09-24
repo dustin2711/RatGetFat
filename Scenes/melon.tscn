@@ -5,23 +5,23 @@
 [ext_resource type="Texture2D" uid="uid://eapo7kjxlrjq" path="res://Melon3.png" id="3_4ktki"]
 [ext_resource type="Script" path="res://Food.gd" id="3_bhd8s"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w6j3t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifqkf"]
 atlas = ExtResource("1_m84tj")
-region = Rect2(0, 0, 18, 17)
+region = Rect2(0, 0, 12, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a2qa0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccrio"]
 atlas = ExtResource("2_i24q6")
-region = Rect2(0, 0, 18, 17)
+region = Rect2(0, 0, 12, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tlfi5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwngk"]
 atlas = ExtResource("3_4ktki")
-region = Rect2(0, 0, 18, 17)
+region = Rect2(0, 0, 12, 11)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fnd83"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w6j3t")
+"texture": SubResource("AtlasTexture_ifqkf")
 }],
 "loop": true,
 "name": &"Health1",
@@ -29,7 +29,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a2qa0")
+"texture": SubResource("AtlasTexture_ccrio")
 }],
 "loop": true,
 "name": &"Health2",
@@ -37,7 +37,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tlfi5")
+"texture": SubResource("AtlasTexture_nwngk")
 }],
 "loop": true,
 "name": &"Health3",
@@ -45,6 +45,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3v32"]
+radius = 6.08276
 
 [node name="Melon" type="AnimatedSprite2D"]
 texture_filter = 1

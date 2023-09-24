@@ -68,7 +68,7 @@ func load_food():
 # is overridden in child classes
 func spawn():
 	# Update current camera parameters
-	quarter_camera_size = 0.48 * camera.get_viewport_rect().size / camera_zoom
+	quarter_camera_size = 0.47 * camera.get_viewport_rect().size / camera_zoom
 	camera_position = camera.get_screen_center_position()
 	camera_zoom = camera.zoom.x
 	
@@ -81,8 +81,8 @@ func spawn():
 # K Key spawns food
 func _input(event):
 	if event is InputEventKey:
-		var just_pressed = event.is_pressed() and not event.is_echo()
-		if just_pressed and event.keycode == KEY_N:
+		var just_pressed = event.is_pressed()# and not event.is_echo()
+		if just_pressed and event.keycode == KEY_1:
 			spawn()
 		
 
