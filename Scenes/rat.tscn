@@ -1,7 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://dkvvqjtcqy0x3"]
 
 [ext_resource type="Texture2D" uid="uid://b2uxy4e3o44ea" path="res://GrayRat.png" id="1_3yo1i"]
-[ext_resource type="Script" path="res://PlayerRat.gd" id="2_8e0rc"]
+[ext_resource type="Script" path="res://Rat.gd" id="2_m4fu3"]
 [ext_resource type="AudioStream" uid="uid://cvqy0mkrhomyt" path="res://RatEating1.mp3" id="3_werbm"]
 [ext_resource type="Texture2D" uid="uid://bkw4266hnjfkl" path="res://Stun.png" id="4_37acy"]
 [ext_resource type="AudioStream" uid="uid://cxaj3fsaybm8g" path="res://RatSqueaking.mp3" id="4_ycl6w"]
@@ -170,6 +170,8 @@ cache/0/16/0/scale = 1.0
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/2/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/22/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/14/0 = Vector2(0, 0)
 cache/0/2/0/ascent = 0.0
 cache/0/2/0/descent = 0.0
 cache/0/2/0/underline_position = 0.0
@@ -178,6 +180,8 @@ cache/0/2/0/scale = 1.0
 cache/0/2/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/2/0/kerning_overrides/2/0 = Vector2(0, 0)
 cache/0/2/0/kerning_overrides/22/0 = Vector2(0, 0)
+cache/0/2/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/2/0/kerning_overrides/14/0 = Vector2(0, 0)
 cache/0/22/0/ascent = 0.0
 cache/0/22/0/descent = 0.0
 cache/0/22/0/underline_position = 0.0
@@ -186,6 +190,28 @@ cache/0/22/0/scale = 1.0
 cache/0/22/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/22/0/kerning_overrides/2/0 = Vector2(0, 0)
 cache/0/22/0/kerning_overrides/22/0 = Vector2(0, 0)
+cache/0/22/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/22/0/kerning_overrides/14/0 = Vector2(0, 0)
+cache/0/15/0/ascent = 0.0
+cache/0/15/0/descent = 0.0
+cache/0/15/0/underline_position = 0.0
+cache/0/15/0/underline_thickness = 0.0
+cache/0/15/0/scale = 1.0
+cache/0/15/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/2/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/22/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/14/0 = Vector2(0, 0)
+cache/0/14/0/ascent = 0.0
+cache/0/14/0/descent = 0.0
+cache/0/14/0/underline_position = 0.0
+cache/0/14/0/underline_thickness = 0.0
+cache/0/14/0/scale = 1.0
+cache/0/14/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/14/0/kerning_overrides/2/0 = Vector2(0, 0)
+cache/0/14/0/kerning_overrides/22/0 = Vector2(0, 0)
+cache/0/14/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/14/0/kerning_overrides/14/0 = Vector2(0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qtkmu"]
 radius = 11.0
@@ -230,18 +256,18 @@ animations = [{
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_g57gc")
 animation = &"walking_down"
-script = ExtResource("2_8e0rc")
-speed = 400
-stunned_ms = 900
-eating_ms = 1200
+script = ExtResource("2_m4fu3")
 
 [node name="Name" type="Label" parent="."]
-offset_left = 1.0
-offset_top = -26.0
+offset_left = -8.0
+offset_top = -23.0
 offset_right = 41.0
+offset_bottom = 3.0
 theme_override_fonts/font = SubResource("FontFile_tl3te")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "SP1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Area" type="Area2D" parent="."]
 

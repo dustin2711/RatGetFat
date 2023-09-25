@@ -77,12 +77,12 @@ func load_food():
 #	return load("res://Scenes/melon.tscn")
 #	return load("res://Scenes/nut.tscn")
 #	return load("res://Scenes/cheese.tscn")
-	var random = randi_range(0, 4)
-	if random <= 1:
+	var random = randf_range(0, 100)
+	if random <= 30:
 		return load("res://Scenes/nut.tscn")
-	elif random <= 3:
+	elif random > 30 and random < 75:
 		return load("res://Scenes/melon.tscn")
-	elif random == 4:
+	elif random >= 75:
 		return load("res://Scenes/cheese.tscn")
 	else:
 		assert(false)
