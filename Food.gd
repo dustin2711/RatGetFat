@@ -35,7 +35,7 @@ func get_score(rat: Rat):
 	""" The higher, the more like to go for this food. """
 	
 	# Increase score with decreasing distance to this rat
-	var distance_to_rat_score = 1.0 / sqrt(self.global_position.distance_to(rat.global_position))
+	var distance_to_rat_score = 1.0 / sqrt(sqrt(self.global_position.distance_to(rat.global_position)))
 	
 	# The longer same food is chased, the lower the score
 	var boring_score = 1 if rat.time_set_best_food and (Time.get_ticks_msec() - rat.time_set_best_food) < 2000 else 0.25

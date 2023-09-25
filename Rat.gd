@@ -40,6 +40,8 @@ var best_food: Food = null # computer only
 
 var last_velocity = Vector2(0, 0)
 
+var time_of_calling_ready = 0
+
 func lighten_color(color: Color, factor: float) -> Color:
 	""" 0 means no change, 1 means fully lighten. """
 	factor = clamp(factor, 0.0, 1.0)
@@ -50,6 +52,7 @@ func lighten_color(color: Color, factor: float) -> Color:
 		color.a)
 	
 func _ready():
+	time_of_calling_ready = Time.get_ticks_msec()
 	stun_sprite.visible = false
 	
 	progress_bar.value = 0
@@ -254,7 +257,6 @@ func get_velocity():
 		var best_score = 0  # Set a high initial distance
 		
 		for food in food_spawner.foods:
-			var distance = global_position.distance_to(food.global_position)
 			var score = food.get_score(self)
 			if score > best_score:# and len(food.hunting_rats) == 0:
 				best_food = food
@@ -334,9 +336,10 @@ func get_saturation():
 func increase_saturation(increment):
 	progress_bar.value += increment
 	if progress_bar.value >= progress_bar.max_value:
+		var time_in_seconds = 0.001 * (Time.get_ticks_msec() - time_of_calling_ready)
 		restart_label.visible = true
 		restart_label.modulate = player_color
-		restart_label.text = "Time: " + str(0.001 * Time.get_ticks_msec()) + " s\nPress R to restart."
+		restart_label.text = "Time: " + str(time_in_seconds) + " s\nPress R to restart."
 		winner_label.visible = true
 		winner_label.modulate = player_color
 		winner_label.text = player_name + " wins!"
